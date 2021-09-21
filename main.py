@@ -34,19 +34,18 @@ def text_preproc(x):
   #remove double space
   #x = re.sub(r'\s{2,}', ' ', x)
   return x
-  
+
 df2['Judul Berita (Bersih)'] = df2['title'].apply(text_preproc)
 
 vectorizer = TfidfVectorizer(binary=True)
-
-tfidfvoc = vectorizer.fit(df2['Judul Berita (Bersih)'])
-tfidfvec = vectorizer.fit_transform(df2['Judul Berita (Bersih)']).toarray()
 
 #load vectorizer.vocabulary_
 kosaKata = pickle.load(open("feature.pkl", "rb"))
 
 #load vectorizer.vocabulary_
 xgb_model_loaded = pickle.load(open("xgbmodel.sav", "rb"))
+
+vectorizer.fit(kosaKata)
 
 app = Flask(__name__)
 CORS(app)
