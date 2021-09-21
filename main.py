@@ -32,6 +32,9 @@ def text_preproc(x):
   #x = re.sub(r'\s{2,}', ' ', x)
   return x
 
+tfidfvoc = vectorizer.fit(df2['Judul Berita (Bersih)'])
+tfidfvec = vectorizer.fit_transform(df2['Judul Berita (Bersih)']).toarray()
+
 vectorizer = TfidfVectorizer(binary=True)
 
 #load vectorizer.vocabulary_
