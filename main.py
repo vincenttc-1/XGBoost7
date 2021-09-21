@@ -27,9 +27,9 @@ from flask import Flask,jsonify,request,render_template
 
 def text_preproc(x):
   #case folding
-  x = x.lower()
+  #x = x.lower()
   #remove double space
-  x = re.sub(r'\s{2,}', ' ', x)
+  #x = re.sub(r'\s{2,}', ' ', x)
   return x
 
 vectorizer = TfidfVectorizer(binary=True)
