@@ -34,6 +34,8 @@ def text_preproc(x):
   #remove double space
   #x = re.sub(r'\s{2,}', ' ', x)
   return x
+  
+df2['Judul Berita (Bersih)'] = df2['title'].apply(text_preproc)
 
 vectorizer = TfidfVectorizer(binary=True)
 
