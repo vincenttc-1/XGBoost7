@@ -25,6 +25,9 @@ import string
 from flask_cors import CORS
 from flask import Flask,jsonify,request,render_template
 
+df2 = pd.DataFrame()
+df2['title'] = ['Malaysia Sudutkan RI: Isu Kabut Asap hingga Invasi Babi']
+
 def text_preproc(x):
   #case folding
   #x = x.lower()
