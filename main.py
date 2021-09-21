@@ -25,50 +25,20 @@ import string
 from flask_cors import CORS
 from flask import Flask,jsonify,request,render_template
 
-#nltk.download('punkt')
-
-# import StemmerFactory class
-#from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
-
-df = pd.read_csv("contoh.csv")
-df2 = pd.DataFrame()
-df2['title'] = ['Malaysia Sudutkan RI: Isu Kabut Asap hingga Invasi Babi']
-
 def text_preproc(x):
   #case folding
-  string.x = x.lower()
+  x = x.lower()
   #remove double space
   x = re.sub(r'\s{2,}', ' ', x)
   return x
 
-df2['Judul Berita (Bersih)'] = df2['title'].apply(text_preproc)
-df.head()
-
 vectorizer = TfidfVectorizer(binary=True)
-#X_train_vec = vectorizer.fit_transform(X_train).toarray()
-#X_test_vec = vectorizer.fit_transform(X_test).toarray()
-
-tfidfvoc = vectorizer.fit(df2['Judul Berita (Bersih)'])
-tfidfvec = vectorizer.fit_transform(df2['Judul Berita (Bersih)']).toarray()
-
-print(tfidfvec.shape)
 
 #load vectorizer.vocabulary_
 kosaKata = pickle.load(open("feature.pkl", "rb"))
 
 #load vectorizer.vocabulary_
 xgb_model_loaded = pickle.load(open("xgbmodel.sav", "rb"))
-
-vectorizer.fit(kosaKata)
-
-#print(tfidfvoc.vocabulary_)
-
-transform = vectorizer.transform(df2['Judul Berita (Bersih)']).toarray()
-
-# make predictions for test data
-predict = xgb_model_loaded.predict(transform)
-predictions = [round(value) for value in predict]
-print(predict)
 
 app = Flask(__name__)
 CORS(app)
