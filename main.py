@@ -30,9 +30,9 @@ df2['title'] = ['Malaysia Sudutkan RI: Isu Kabut Asap hingga Invasi Babi']
 
 def text_preproc(x):
   #case folding
-  #x = x.lower()
+  x = x.lower()
   #remove double space
-  #x = re.sub(r'\s{2,}', ' ', x)
+  x = re.sub(r'\s{2,}', ' ', x)
   return x
 
 df2['Judul Berita (Bersih)'] = df2['title'].apply(text_preproc)
@@ -81,15 +81,11 @@ def byFile():
 
     kalimats = []
     prediksis = []
-    # resp['kalimats'] = [None]
-    # resp['prediksis'] = [None]
     for count,f in enumerate(predict) :
       kalimat = arr_text[count],
       prediksi = int(f)
       kalimats.append(kalimat)
       prediksis.append(prediksi)
-      # resp['kalimats'].append(kalimat)
-      # resp['prediksis'].append(prediksi)
 
     return jsonify({"text":kalimats,"predictions":prediksis})
 
